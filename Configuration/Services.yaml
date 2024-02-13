@@ -1,0 +1,12 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  IchHabRecht\Upgrader\Command\UpgradeCommand:
+    tags:
+      -
+        name: 'console.command'
+        command: 'coreupgrader:upgrade'
+        description: 'Run necessary upgrade wizards for TYPO3 8.7, 9.5 and 10.4'

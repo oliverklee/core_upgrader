@@ -36,21 +36,12 @@ class UpgradeCommand extends Command
 
         $io = new SymfonyStyle($input, $output);
 
-        $this->runUpdatePrepare($io);
-        $this->runUpgradeWizards($io, $input->isInteractive(), $input->getOption('force'));
+        $this->runUpgradeWizards($io, $input->isInteractive());
 
         return 0;
     }
 
-    private function runUpdatePrepare(OutputStyle $io)
-    {
-        $io->title('Preparing upgrade');
-        $output = $this->commandDispatcher->executeCommand('upgrade:prepare');
-        $io->success($this->formatOutput($output));
-        $io->newLine(2);
-    }
-
-    private function runUpgradeWizards(OutputStyle $io, bool $isInteractive = true, bool $force = false)
+    private function runUpgradeWizards(OutputStyle $io, bool $isInteractive = truee)
     {
         $io->title('Running TYPO3 upgrade wizards');
         $io->newLine();
@@ -58,12 +49,7 @@ class UpgradeCommand extends Command
 
         $arguments = [
             '--no-interaction',
-            '--deny',
-            'all',
         ];
-        if ($force) {
-            $arguments[] = '--force';
-        }
 
         foreach ($upgradeWizards as $version => $versionUpgrades) {
             $output = [];
